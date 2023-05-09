@@ -26,7 +26,7 @@ export async function showCredentials(req: AuthenticatedRequest, res: Response, 
   }
 }
 
-export async function postCredentials(req: AuthenticatedRequest, res: Response) {
+export async function postCredentials(req: AuthenticatedRequest, res: Response, next: NextFunction) {
   const { title, url, username, password } = req.body as PostCredentialParams;
   const { userId } = req;
 
@@ -36,10 +36,7 @@ export async function postCredentials(req: AuthenticatedRequest, res: Response) 
       credentialId: credential.id,
     });
   } catch (error) {
-    if (error.name === 'DuplicatedTitleError') {
-      return res.status(httpStatus.CONFLICT).send(error);
-    }
-    return res.status(httpStatus.BAD_REQUEST).send(error);
+    next(error)
   }
 }
 

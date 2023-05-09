@@ -26,7 +26,7 @@ export async function showNetwork(req: AuthenticatedRequest, res: Response, next
   }
 }
 
-export async function postNetwork(req: AuthenticatedRequest, res: Response) {
+export async function postNetwork(req: AuthenticatedRequest, res: Response, next: NextFunction) {
   const { title, network, password } = req.body as PostNetworkParams;
   const { userId } = req;
 
@@ -36,10 +36,7 @@ export async function postNetwork(req: AuthenticatedRequest, res: Response) {
       networkId: response.id,
     });
   } catch (error) {
-    if (error.name === 'DuplicatedTitleError') {
-      return res.status(httpStatus.CONFLICT).send(error);
-    }
-    return res.status(httpStatus.BAD_REQUEST).send(error);
+    next(error)
   }
 }
 

@@ -13,9 +13,10 @@
     "lint": "eslint .",
     "lint:staged": "lint-staged",
     "test": "NODE_ENV=test jest --passWithNoTests --runInBand",
+    "test:coverage": "NODE_ENV=test jest --passWithNoTests --runInBand --coverage --collectCoverageFrom='./src/**'",
     "test:migration:run": "npm run test:load-envs prisma migrate deploy",
     "test:migration:generate": "npm run test:load-envs prisma migrate dev",
-    "test:watch": "jest --watch --passWithNoTests --runInBand",
+    "test:watch": "NODE_ENV=test jest --watch --passWithNoTests --runInBand",
     "test:load-envs": "dotenv -e .env.test",
     "test:seed": "npm run test:load-envs prisma db seed",
     "dev:load-envs": "dotenv -e .env.development",
@@ -69,7 +70,7 @@
     "tsconfig-paths": "3.9.0",
     "ttypescript": "^1.5.13",
     "typescript": "^4.9.5",
-    "typescript-transform-paths": "2.2.3"
+    "typescript-transform-paths": "^2.2.3"
   },
   "dependencies": {
     "@brazilian-utils/brazilian-utils": "^1.0.0-rc.12",

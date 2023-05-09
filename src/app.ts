@@ -18,7 +18,7 @@ app
   .use('/users', usersRouter)
   .use('/auth', authenticationRouter)
   .use('/credentials', credentialsRouter)
-  .use('/network', networksRouter)
+  .use('/networks', networksRouter)
   .use(handleApplicationErrors);
 
 export function init(): Promise<Express> {
